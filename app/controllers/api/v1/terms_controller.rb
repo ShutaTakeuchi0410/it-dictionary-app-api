@@ -24,11 +24,12 @@ class Api::V1::TermsController < ApplicationController
         # NOTE: stripメソッドで特殊文字が存在してる場合に取りぞいています。
         url = e_words_page.uri.to_s
         name = e_words_page.search('//*[@id="content"]/article/h1/span[1]').inner_text.strip
+        category = e_words_page.search('//*[@id="breadcrumb"]/li[2]/a').inner_text.strip
         summary = e_words_page.search('//*[@id="Summary"]').inner_text.strip
         detail = e_words_page.search('//*[@id="content"]/article/p[1]').inner_text.strip
 
         status = true
-        data = { url: url, name: name, summary: summary, detail: detail }
+        data = { url: url, name: name, category: category, summary: summary, detail: detail }
 
         break
       end
